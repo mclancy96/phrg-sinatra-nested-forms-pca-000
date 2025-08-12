@@ -1,20 +1,26 @@
 class Pirate
-  # TODO: Implement the Pirate class
-  # This class should have the following attributes:
-  # - name (string)
-  # - weight (string)
-  # - height (string)
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  # TODO: Add attr_accessor for name, weight, and height
+  attr_accessor :name, :weight, :height, :id
 
-  # TODO: Add an initialize method that accepts these attributes
+  @@all = []
 
-  # TODO: Add a class variable to store all pirate instances
+  def initialize(attributes = {})
+    super
+    @id = self.class.all.length + 1
+    @@all << self
+  end
 
-  # TODO: Add a class method .all that returns all pirates
+  def self.all
+    @@all
+  end
 
-  # TODO: Add logic to store each new pirate instance when created
+  def self.find(id)
+    @@all.find { |pirate| pirate.id == id.to_i }
+  end
 
-  # Note: This lab doesn't use a database, so you'll manage data in memory
-  # similar to how it was done in the Sinatra version
+  def persisted?
+    false
+  end
 end

@@ -1,23 +1,20 @@
 class Ship
-  # TODO: Implement the Ship class
-  # This class should have the following attributes:
-  # - name (string)
-  # - type (string)
-  # - booty (string)
+  attr_accessor :name, :type, :booty
 
-  # TODO: Add attr_accessor for name, type, and booty
+  @@all = []
 
-  # TODO: Add an initialize method that accepts these attributes
+  def initialize(attributes = {})
+    @name = attributes[:name]
+    @type = attributes[:type]
+    @booty = attributes[:booty]
+    @@all << self
+  end
 
-  # TODO: Add a class variable to store all ship instances
+  def self.all
+    @@all
+  end
 
-  # TODO: Add a class method .all that returns all ships
-
-  # TODO: Add a class method .clear that deletes all ships
-  # This method is used in the test suite to clean up between tests
-
-  # TODO: Add logic to store each new ship instance when created
-
-  # Note: This lab doesn't use a database, so you'll manage data in memory
-  # similar to how it was done in the Sinatra version
+  def self.clear
+    @@all.clear
+  end
 end

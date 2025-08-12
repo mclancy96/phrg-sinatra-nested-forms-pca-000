@@ -1,25 +1,30 @@
 <h1>Create a New Pirate</h1>
 
-<!-- TODO: Create a form for pirate with nested ships -->
-<!-- Use Rails form_with helper to create the form -->
-<!-- The form should POST to '/pirates' route -->
+<%= form_tag "/pirates", method: :post do %>
+  <div class="field">
+    <%= label_tag "pirate[name]", "Name" %>
+    <%= text_field_tag "pirate[name]" %>
+  </div>
 
-<!-- TODO: Add form fields for pirate attributes -->
-<!-- Include fields for: name, weight, height -->
-<!-- Use proper Rails form helpers like text_field -->
-<!-- Name attributes should match: pirate[name], pirate[weight], pirate[height] -->
+  <div class="field">
+    <%= label_tag "pirate[weight]", "Weight" %>
+    <%= text_field_tag "pirate[weight]" %>
+  </div>
 
-<!-- TODO: Add nested form fields for ships -->
-<!-- Create fields for TWO ships -->
-<!-- Each ship needs: name, type, booty attributes -->
-<!-- Use proper naming: pirate[ships][][name], pirate[ships][][type], pirate[ships][][booty] -->
+  <div class="field">
+    <%= label_tag "pirate[height]", "Height" %>
+    <%= text_field_tag "pirate[height]" %>
+  </div>
 
-<!-- TODO: Add specific IDs for ship fields to match test expectations -->
-<!-- First ship fields should have IDs: ship_name_1, ship_type_1, ship_booty_1 -->
-<!-- Second ship fields should have IDs: ship_name_2, ship_type_2, ship_booty_2 -->
+  <h3>Ship 1</h3>
+  <%= text_field_tag "pirate[ships][][name]", "", id: "ship_name_1", placeholder: "Ship Name" %>
+  <%= text_field_tag "pirate[ships][][type]", "", id: "ship_type_1", placeholder: "Ship Type" %>
+  <%= text_field_tag "pirate[ships][][booty]", "", id: "ship_booty_1", placeholder: "Ship Booty" %>
 
-<!-- TODO: Add a submit button -->
-<!-- The button should have the text "Submit" to match test expectations -->
+  <h3>Ship 2</h3>
+  <%= text_field_tag "pirate[ships][][name]", "", id: "ship_name_2", placeholder: "Ship Name" %>
+  <%= text_field_tag "pirate[ships][][type]", "", id: "ship_type_2", placeholder: "Ship Type" %>
+  <%= text_field_tag "pirate[ships][][booty]", "", id: "ship_booty_2", placeholder: "Ship Booty" %>
 
-<!-- HINT: You can use fields_for helper for nested forms in Rails -->
-<!-- HINT: Remember to set up strong parameters in the controller -->
+  <%= submit_tag "Submit" %>
+<% end %>

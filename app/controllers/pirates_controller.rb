@@ -1,39 +1,42 @@
 class PiratesController < ApplicationController
-  # TODO: Implement the following controller actions:
-
   def index
-    # TODO: Render the root page with welcome message
-    # This should display "Welcome to the Nested Forms Lab!"
-    # and instructions to navigate to '/new'
+    # Render the root page with welcome message
+    render :index
   end
 
   def new
-    # TODO: Initialize a new pirate instance for the form
-    # This action should render a form that allows users to:
-    # - Enter pirate details (name, weight, height)
-    # - Enter details for two ships (name, type, booty)
-    # Use Rails form helpers with nested attributes
+    # Initialize a new pirate instance for the form
+    @pirate = Pirate.new
+    render :new
   end
 
   def create
-    # TODO: Handle form submission and create pirate with ships
-    # Process the nested params for pirate and ships
-    # Create instances using the Pirate and Ship classes
-    # Redirect to show page or render show template
+    # Handle form submission and create pirate with ships
+    @pirate = Pirate.new(pirate_params.except(:ships))
+
+    # Create ships from nested params
+    @ships = []
+    if pirate_params[:ships].present?
+      pirate_params[:ships].each do |ship_params|
+        @ships << Ship.new(ship_params) if ship_params.values.any?(&:present?)
+      end
+    end
+
+    # Render show page with created pirate and ships
+    render :show
   end
 
   def show
-    # TODO: Display pirate and ship information
-    # Show all the details that were submitted in the form
-    # Include pirate name, weight, height and all ship details
+    # Display pirate and ship information
+    @pirate = Pirate.find(params[:id])
+    @ships = Ship.all.last(2) # Get the last 2 ships created
+    render :show
   end
 
   private
 
   def pirate_params
-    # TODO: Define strong parameters for pirate and nested ships
-    # Allow pirate attributes: name, weight, height
-    # Allow ships attributes: name, type, booty
-    # Remember to permit the ships array properly for nested forms
+    # Define strong parameters for pirate and nested ships
+    params.require(:pirate).permit(:name, :weight, :height, ships: %i[name type booty])
   end
 end
