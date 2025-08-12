@@ -1,5 +1,6 @@
 <h1>Create a New Pirate</h1>
 
+<<<<<<< HEAD
 <%= form_tag "/pirates", method: :post do %>
   <div class="field">
     <%= label_tag "pirate[name]", "Name" %>
@@ -15,6 +16,20 @@
     <%= label_tag "pirate[height]", "Height" %>
     <%= text_field_tag "pirate[height]" %>
   </div>
+=======
+<!-- TODO: Create a form for pirate with nested ships using ActiveRecord -->
+<!-- Use Rails form_with helper with the @pirate model -->
+<!-- The form should POST to '/pirates' route -->
+
+<!-- TODO: Add form fields for pirate attributes -->
+<!-- Include fields for: name, weight, height -->
+<!-- Use proper Rails form helpers like text_field -->
+
+<!-- TODO: Add nested form fields for ships using fields_for -->
+<!-- Create fields for TWO ships using fields_for helper -->
+<!-- Each ship needs: name, type, booty attributes -->
+<!-- Example: form.fields_for :ships do |ship_form| -->
+>>>>>>> origin/master
 
   <h3>Ship 1</h3>
   <%= text_field_tag "pirate[ships][][name]", "", id: "ship_name_1", placeholder: "Ship Name" %>
@@ -26,5 +41,11 @@
   <%= text_field_tag "pirate[ships][][type]", "", id: "ship_type_2", placeholder: "Ship Type" %>
   <%= text_field_tag "pirate[ships][][booty]", "", id: "ship_booty_2", placeholder: "Ship Booty" %>
 
+<<<<<<< HEAD
   <%= submit_tag "Submit" %>
 <% end %>
+=======
+<!-- HINT: You'll need to build ship objects in the controller for the form -->
+<!-- HINT: Remember to set up nested attributes in the Pirate model -->
+<!-- HINT: Use accepts_nested_attributes_for :ships in the Pirate model -->
+>>>>>>> origin/master

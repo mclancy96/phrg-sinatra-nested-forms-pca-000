@@ -1,20 +1,11 @@
-class Ship
-  attr_accessor :name, :type, :booty
+class Ship < ApplicationRecord
+  # TODO: Set up associations with pirates
+  # Use belongs_to to associate ships with pirates
+  # Example: belongs_to :pirate
 
-  @@all = []
+  # TODO: Add validations if needed
+  # Example: validates :name, presence: true
 
-  def initialize(attributes = {})
-    @name = attributes[:name]
-    @type = attributes[:type]
-    @booty = attributes[:booty]
-    @@all << self
-  end
-
-  def self.all
-    @@all
-  end
-
-  def self.clear
-    @@all.clear
-  end
+  # NOTE: This lab uses ActiveRecord, so ships will be persisted to the database
+  # The database table should have columns: name, type, booty, pirate_id
 end

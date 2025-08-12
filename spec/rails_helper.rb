@@ -3,7 +3,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/rails'
 
@@ -31,9 +31,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # You can uncomment this line to turn off ActiveRecord support entirely.
-  # config.use_active_record = false
-
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -56,4 +53,10 @@ RSpec.configure do |config|
 
   # Configure Capybara
   Capybara.default_driver = :rack_test
+
+  # Clean up database between tests
+  config.before(:each) do
+    Ship.destroy_all if defined?(Ship)
+    Pirate.destroy_all if defined?(Pirate)
+  end
 end
