@@ -1,4 +1,4 @@
 class Pirate < ApplicationRecord
-  # TODO: Set up associations with ships
-  # TODO: Set up nested attributes for ships
+  has_many :ships, dependent: :destroy
+  accepts_nested_attributes_for :ships
 end

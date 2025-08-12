@@ -9,7 +9,7 @@
 
 <div class="ships-info">
   <h2>Ships</h2>
-  <% @ships.each_with_index do |ship, index| %>
+  <% @pirate.ships.each_with_index do |ship, index| %>
     <div class="ship">
       <h3>Ship <%= index + 1 %></h3>
       <p><strong>Name:</strong> <%= ship.name %></p>

@@ -1,0 +1,493 @@
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "pirates"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "pirates" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "weight" varchar, "height" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "ships"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "ships" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "type" varchar, "booty" varchar, "pirate_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_ships_on_pirate_id" ON "ships" ("pirate_id")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aships" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "type" varchar DEFAULT NULL, "booty" varchar DEFAULT NULL, "pirate_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aships_on_pirate_id" ON "aships" ("pirate_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aships" ("id","name","type","booty","pirate_id","created_at","updated_at")
+                     SELECT "id","name","type","booty","pirate_id","created_at","updated_at" FROM "ships"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "ships"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "ships" ("id" integer NOT NULL PRIMARY KEY, "name" varchar DEFAULT NULL, "type" varchar DEFAULT NULL, "booty" varchar DEFAULT NULL, "pirate_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_b2e3832084"
+FOREIGN KEY ("pirate_id")
+  REFERENCES "pirates" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_ships_on_pirate_id" ON "ships" ("pirate_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("id","name","type","booty","pirate_id","created_at","updated_at")
+                     SELECT "id","name","type","booty","pirate_id","created_at","updated_at" FROM "aships"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "aships"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (2)[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(1);
+
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "test"], ["created_at", "2025-08-12 19:11:13.904679"], ["updated_at", "2025-08-12 19:11:13.904679"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "74ba2205569189cfc317e18cc41cfe9ecd9af238"], ["created_at", "2025-08-12 19:11:13.905864"], ["updated_at", "2025-08-12 19:11:13.905864"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.1ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/" for 127.0.0.1 at 2025-08-12 15:11:13 -0400
+Processing by PiratesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/index.html.erb within layouts/application
+  Rendered pirates/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 467)
+  Rendered layout layouts/application.html.erb (Duration: 7.8ms | Allocations: 10542)
+Completed 200 OK in 12ms (Views: 10.5ms | ActiveRecord: 0.0ms | Allocations: 14248)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/" for 127.0.0.1 at 2025-08-12 15:11:13 -0400
+Processing by PiratesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/index.html.erb within layouts/application
+  Rendered pirates/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 35)
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 858)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 1092)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:13 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 3.7ms | Allocations: 4470)
+  Rendered layout layouts/application.html.erb (Duration: 4.5ms | Allocations: 5306)
+Completed 200 OK in 21ms (Views: 4.9ms | ActiveRecord: 0.2ms | Allocations: 16155)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:13 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.6ms | Allocations: 1262)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 2089)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 2584)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:13 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 1262)
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 2083)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 2579)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 1262)
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | Allocations: 2083)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 2578)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 1262)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 2085)
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 2581)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 1262)
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 2083)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 2578)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Ian", "weight"=>"165", "height"=>"95", "ships_attributes"=>{"0"=>{"name"=>"Titanic", "type"=>"Steam Liner", "booty"=>"Silver"}, "1"=>{"name"=>"Carpathia", "type"=>"Rescue Ship", "booty"=>"Inner Tubes"}}}, "commit"=>"Submit"}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 725)
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.5ms | Allocations: 1262)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 2083)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 2581)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Ian", "weight"=>"165", "height"=>"95", "ships_attributes"=>{"0"=>{"name"=>"Titanic", "type"=>"Steam Liner", "booty"=>"Silver"}, "1"=>{"name"=>"Carpathia", "type"=>"Rescue Ship", "booty"=>"Inner Tubes"}}}, "commit"=>"Submit"}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 563)
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 1262)
+  Rendered layout layouts/application.html.erb (Duration: 0.8ms | Allocations: 2083)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 2578)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Ian", "weight"=>"165", "height"=>"95", "ships_attributes"=>{"0"=>{"name"=>"Titanic", "type"=>"Steam Liner", "booty"=>"Silver"}, "1"=>{"name"=>"Carpathia", "type"=>"Rescue Ship", "booty"=>"Inner Tubes"}}}, "commit"=>"Submit"}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 563)
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 1263)
+  Rendered layout layouts/application.html.erb (Duration: 1.1ms | Allocations: 2099)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms | Allocations: 2595)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Ian", "weight"=>"165", "height"=>"95", "ships_attributes"=>{"0"=>{"name"=>"Titanic", "type"=>"Steam Liner", "booty"=>"Silver"}, "1"=>{"name"=>"Carpathia", "type"=>"Rescue Ship", "booty"=>"Inner Tubes"}}}, "commit"=>"Submit"}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 563)
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.6ms | Allocations: 1262)
+  Rendered layout layouts/application.html.erb (Duration: 1.1ms | Allocations: 2089)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms | Allocations: 2585)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:11:14 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Captain Jack Sparrow", "weight"=>"190 lbs", "height"=>"5 feet 11 inches", "ships_attributes"=>{"0"=>{"name"=>"Flying Dutchman", "type"=>"ghost ship", "booty"=>"gold coins"}, "1"=>{"name"=>"Black Pearl", "type"=>"merchant vessel", "booty"=>"treasure map"}}}, "commit"=>"Submit"}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 550)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "schema_sha1"]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/index.html.erb within layouts/application
+  Rendered pirates/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 466)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | Allocations: 10543)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 0.0ms | Allocations: 14250)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/index.html.erb within layouts/application
+  Rendered pirates/index.html.erb within layouts/application (Duration: 0.0ms | Allocations: 35)
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 858)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 1093)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.5ms | Allocations: 1130)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 1951)
+Completed 200 OK in 9ms (Views: 1.2ms | ActiveRecord: 0.2ms | Allocations: 12675)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 1506)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 1999)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 1506)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 1999)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 1506)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 1999)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 0.5ms | Allocations: 1506)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 1999)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 1506)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 1999)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Ian", "weight"=>"165", "height"=>"95", "ships"=>[{"name"=>"Titanic", "type"=>"Steam Liner", "booty"=>"Silver"}, {"name"=>"Carpathia", "type"=>"Rescue Ship", "booty"=>"Inner Tubes"}]}, "commit"=>"Submit"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPirate Create (0.3ms)[0m  [1m[32mINSERT INTO "pirates" ("name", "weight", "height", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ian"], ["weight", "165"], ["height", "95"], ["created_at", "2025-08-12 19:12:58.074378"], ["updated_at", "2025-08-12 19:12:58.074378"]]
+  [1m[36mShip Create (0.1ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Titanic"], ["type", "Steam Liner"], ["booty", "Silver"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.075001"], ["updated_at", "2025-08-12 19:12:58.075001"]]
+  [1m[36mShip Create (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Carpathia"], ["type", "Rescue Ship"], ["booty", "Inner Tubes"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.075208"], ["updated_at", "2025-08-12 19:12:58.075208"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/pirates/1
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 2486)
+Started GET "/pirates/1" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates" WHERE "pirates"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/show.html.erb within layouts/application
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships" WHERE "ships"."pirate_id" = ?[0m  [["pirate_id", 1]]
+  Rendered pirates/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 746)
+  Rendered layout layouts/application.html.erb (Duration: 1.0ms | Allocations: 1561)
+Completed 200 OK in 1ms (Views: 1.2ms | ActiveRecord: 0.0ms | Allocations: 2303)
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Destroy (0.0ms)[0m  [1m[31mDELETE FROM "ships" WHERE "ships"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Destroy (0.0ms)[0m  [1m[31mDELETE FROM "ships" WHERE "ships"."id" = ?[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships" WHERE "ships"."pirate_id" = ?[0m  [["pirate_id", 1]]
+  [1m[36mPirate Destroy (0.0ms)[0m  [1m[31mDELETE FROM "pirates" WHERE "pirates"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 1521)
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms | Allocations: 2015)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Ian", "weight"=>"165", "height"=>"95", "ships"=>[{"name"=>"Titanic", "type"=>"Steam Liner", "booty"=>"Silver"}, {"name"=>"Carpathia", "type"=>"Rescue Ship", "booty"=>"Inner Tubes"}]}, "commit"=>"Submit"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPirate Create (0.2ms)[0m  [1m[32mINSERT INTO "pirates" ("name", "weight", "height", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ian"], ["weight", "165"], ["height", "95"], ["created_at", "2025-08-12 19:12:58.092802"], ["updated_at", "2025-08-12 19:12:58.092802"]]
+  [1m[36mShip Create (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Titanic"], ["type", "Steam Liner"], ["booty", "Silver"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.093203"], ["updated_at", "2025-08-12 19:12:58.093203"]]
+  [1m[36mShip Create (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Carpathia"], ["type", "Rescue Ship"], ["booty", "Inner Tubes"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.093351"], ["updated_at", "2025-08-12 19:12:58.093351"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/pirates/1
+Completed 302 Found in 1ms (ActiveRecord: 0.2ms | Allocations: 1453)
+Started GET "/pirates/1" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates" WHERE "pirates"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/show.html.erb within layouts/application
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships" WHERE "ships"."pirate_id" = ?[0m  [["pirate_id", 1]]
+  Rendered pirates/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 243)
+  Rendered layout layouts/application.html.erb (Duration: 0.5ms | Allocations: 1061)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 1379)
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Destroy (0.0ms)[0m  [1m[31mDELETE FROM "ships" WHERE "ships"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Destroy (0.0ms)[0m  [1m[31mDELETE FROM "ships" WHERE "ships"."id" = ?[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships" WHERE "ships"."pirate_id" = ?[0m  [["pirate_id", 1]]
+  [1m[36mPirate Destroy (0.0ms)[0m  [1m[31mDELETE FROM "pirates" WHERE "pirates"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 1506)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 1999)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Ian", "weight"=>"165", "height"=>"95", "ships"=>[{"name"=>"Titanic", "type"=>"Steam Liner", "booty"=>"Silver"}, {"name"=>"Carpathia", "type"=>"Rescue Ship", "booty"=>"Inner Tubes"}]}, "commit"=>"Submit"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPirate Create (0.1ms)[0m  [1m[32mINSERT INTO "pirates" ("name", "weight", "height", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ian"], ["weight", "165"], ["height", "95"], ["created_at", "2025-08-12 19:12:58.105316"], ["updated_at", "2025-08-12 19:12:58.105316"]]
+  [1m[36mShip Create (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Titanic"], ["type", "Steam Liner"], ["booty", "Silver"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.105611"], ["updated_at", "2025-08-12 19:12:58.105611"]]
+  [1m[36mShip Create (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Carpathia"], ["type", "Rescue Ship"], ["booty", "Inner Tubes"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.105744"], ["updated_at", "2025-08-12 19:12:58.105744"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/pirates/1
+Completed 302 Found in 1ms (ActiveRecord: 0.2ms | Allocations: 1453)
+Started GET "/pirates/1" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates" WHERE "pirates"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/show.html.erb within layouts/application
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships" WHERE "ships"."pirate_id" = ?[0m  [["pirate_id", 1]]
+  Rendered pirates/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 243)
+  Rendered layout layouts/application.html.erb (Duration: 0.5ms | Allocations: 1058)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 1376)
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Destroy (0.0ms)[0m  [1m[31mDELETE FROM "ships" WHERE "ships"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Destroy (0.0ms)[0m  [1m[31mDELETE FROM "ships" WHERE "ships"."id" = ?[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships" WHERE "ships"."pirate_id" = ?[0m  [["pirate_id", 1]]
+  [1m[36mPirate Destroy (0.0ms)[0m  [1m[31mDELETE FROM "pirates" WHERE "pirates"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 1506)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 1999)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Ian", "weight"=>"165", "height"=>"95", "ships"=>[{"name"=>"Titanic", "type"=>"Steam Liner", "booty"=>"Silver"}, {"name"=>"Carpathia", "type"=>"Rescue Ship", "booty"=>"Inner Tubes"}]}, "commit"=>"Submit"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPirate Create (0.2ms)[0m  [1m[32mINSERT INTO "pirates" ("name", "weight", "height", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ian"], ["weight", "165"], ["height", "95"], ["created_at", "2025-08-12 19:12:58.118912"], ["updated_at", "2025-08-12 19:12:58.118912"]]
+  [1m[36mShip Create (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Titanic"], ["type", "Steam Liner"], ["booty", "Silver"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.119331"], ["updated_at", "2025-08-12 19:12:58.119331"]]
+  [1m[36mShip Create (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Carpathia"], ["type", "Rescue Ship"], ["booty", "Inner Tubes"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.119494"], ["updated_at", "2025-08-12 19:12:58.119494"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/pirates/1
+Completed 302 Found in 1ms (ActiveRecord: 0.2ms | Allocations: 1453)
+Started GET "/pirates/1" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates" WHERE "pirates"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/show.html.erb within layouts/application
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships" WHERE "ships"."pirate_id" = ?[0m  [["pirate_id", 1]]
+  Rendered pirates/show.html.erb within layouts/application (Duration: 0.2ms | Allocations: 243)
+  Rendered layout layouts/application.html.erb (Duration: 0.5ms | Allocations: 1058)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 1376)
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Destroy (0.0ms)[0m  [1m[31mDELETE FROM "ships" WHERE "ships"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Destroy (0.0ms)[0m  [1m[31mDELETE FROM "ships" WHERE "ships"."id" = ?[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships" WHERE "ships"."pirate_id" = ?[0m  [["pirate_id", 1]]
+  [1m[36mPirate Destroy (0.0ms)[0m  [1m[31mDELETE FROM "pirates" WHERE "pirates"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships"[0m
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates"[0m
+Started GET "/new" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/new.html.erb within layouts/application
+  Rendered pirates/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 685)
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 1506)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 1999)
+Started POST "/pirates" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#create as HTML
+  Parameters: {"pirate"=>{"name"=>"Captain Jack Sparrow", "weight"=>"190 lbs", "height"=>"5 feet 11 inches", "ships"=>[{"name"=>"Flying Dutchman", "type"=>"ghost ship", "booty"=>"gold coins"}, {"name"=>"Black Pearl", "type"=>"merchant vessel", "booty"=>"treasure map"}]}, "commit"=>"Submit"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPirate Create (0.1ms)[0m  [1m[32mINSERT INTO "pirates" ("name", "weight", "height", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Captain Jack Sparrow"], ["weight", "190 lbs"], ["height", "5 feet 11 inches"], ["created_at", "2025-08-12 19:12:58.131930"], ["updated_at", "2025-08-12 19:12:58.131930"]]
+  [1m[36mShip Create (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Flying Dutchman"], ["type", "ghost ship"], ["booty", "gold coins"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.132295"], ["updated_at", "2025-08-12 19:12:58.132295"]]
+  [1m[36mShip Create (0.0ms)[0m  [1m[32mINSERT INTO "ships" ("name", "type", "booty", "pirate_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Black Pearl"], ["type", "merchant vessel"], ["booty", "treasure map"], ["pirate_id", 1], ["created_at", "2025-08-12 19:12:58.132432"], ["updated_at", "2025-08-12 19:12:58.132432"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/pirates/1
+Completed 302 Found in 1ms (ActiveRecord: 0.2ms | Allocations: 1455)
+Started GET "/pirates/1" for 127.0.0.1 at 2025-08-12 15:12:58 -0400
+Processing by PiratesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPirate Load (0.0ms)[0m  [1m[34mSELECT "pirates".* FROM "pirates" WHERE "pirates"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering pirates/show.html.erb within layouts/application
+  [1m[36mShip Load (0.0ms)[0m  [1m[34mSELECT "ships".* FROM "ships" WHERE "ships"."pirate_id" = ?[0m  [["pirate_id", 1]]
+  Rendered pirates/show.html.erb within layouts/application (Duration: 0.2ms | Allocations: 245)
+  Rendered layout layouts/application.html.erb (Duration: 0.6ms | Allocations: 1075)
+Completed 200 OK in 4ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 1395)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
